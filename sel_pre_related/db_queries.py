@@ -11,14 +11,15 @@ def books_list():
     print("==================================================================")
     queryset = models.Book.objects.filter()
 
-    books = [obj.get_details() for obj in queryset]
+    # books = [obj.name for obj in queryset]
+    books = []
 
-    print(books)
+    # print(books)
 
-    # for book in queryset:
-    #     books.append(
-    #         {"id": book.id, "name": book.name, "publisher": book.publisher.name}
-    #     )
+    for book in queryset:
+        books.append(
+            {"id": book.id, "name": book.name, "publisher": book.publisher.name}
+        )
 
     return books
 
@@ -32,7 +33,7 @@ def book_list_selected_related():
 
     books = [obj.get_details() for obj in queryset]
 
-    print(books)
+    # print(books)
 
     # for book in queryset:
     #     books.append(
@@ -81,12 +82,39 @@ def course_list():
     print("==================================================================")
     print("Select related")
     print("==================================================================")
+    # name = "%ankit%g%goswami%"
+    # new_name = name.replace("%", " ").strip()
+    # print(new_name)
+    # instance = models.Book.objects.filter(name__icontains=new_name)
 
-    queryset = tr_models.Course.objects.select_related()
+    # print("===================> ", instance)
+    queryset = tr_models.Course.objects.all()
 
     courses = []
 
     for course in queryset:
-        courses.append({"id": course.id, "name": course.course_name})
+        courses.append({"name": course.course_name})
 
     return courses
+
+
+@query_debugger
+def transfer_select_related():
+    # "initiated_by", "transfer_to"
+    queryset = tr_models.Transfer.objects.select_related()
+
+    transfers = []
+
+    for transfer in queryset:
+        transfers.append(
+            {
+                "id": transfer.id,
+                "amount": transfer.amount,
+                "created_at": transfer.created_at,
+                "initiated_by": transfer.initiated_by.username,
+                "transfer_to": transfer.transfer_to.username,
+            }
+        )
+
+    print(transfers)
+    return transfers

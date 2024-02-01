@@ -21,5 +21,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("django-transaction/", include("django_transaction.urls")),
     path("select-prefetch-related/", include("sel_pre_related.urls")),
+    path("world-map/", include("world_map.urls")),
     # path('__debug__/', include('debug_toolbar.urls')),
 ]

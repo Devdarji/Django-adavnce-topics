@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_transaction",
     "rest_framework",
-    "sel_pre_related"
+    "sel_pre_related",
+    "world_map"
     # 'debug_toolbar'
 ]
 
